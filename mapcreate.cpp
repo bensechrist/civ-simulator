@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include "terrainagent.h"
 
 using namespace std;
 
@@ -7,20 +8,27 @@ using namespace std;
 #define usageError 1    //Indicate the program was called incorrectly
 
 void printHelpMessage(int coutType);
-
+class terrainAgent;
 
 int main(int argc,char* argv[])
 {
 
-    if(argc > 3)
+    int paramFlag = 0;  //Value to be incrementmented upon encountering a parameter flag
+
+    if(argc > 3)    //Check for more than 3 arguments (implies a parameter flag)
     {
         if((argv[1][0] == '-')&&(argv[1][1] == 'h'))
         {
             printHelpMessage(helpParam);
             return 0;
         }
+        else
+        {
+            printHelpMessage(usageError);
+            return 1;
+        }
     }
-    else if(argc == 2)
+    else if(argc == 2)  //Check for 2 arguments (implies only a single parameter flag was used after the program call)
     {
         if((argv[1][0] == '-')&&(argv[1][1] == 'h'))
         {
@@ -34,15 +42,24 @@ int main(int argc,char* argv[])
         }
 
     }
-    else if(argc != 3)
+    else if(argc != 3)  //Check for "non-vanilla" program call
     {
         printHelpMessage(usageError);
         return 1;
     }
 
 
+    unsigned int xSize = atoi(argv[1 + paramFlag]);  //Read in the x-size of the map
+    unsigned int ySize = atoi(argv[2 + paramFlag]);  //Read in the y-size of the map
 
+    //cout << endl << "xSize = " << xSize;
+    //cout << endl << "ySize = " << ySize;
 
+    //char map[(xSize+1)*(ySize+1)];
+
+    terrainAgent mapAgent(xSize, ySize);
+    mapAgent.fillMap();
+    cout << mapAgent.printMap();
 
 
 }
@@ -69,3 +86,6 @@ void printHelpMessage(int coutType)
         cerr << "-h     display this help message" << endl;
     }
 }
+
+
+
