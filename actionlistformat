@@ -1,0 +1,24 @@
+//actionlist format file
+//The actionlist is a file which records changes needing to made to the running game map
+//Below is the format of an action.  All arguments are to be separated by exactly one space.
+<instruction> <arguement1> <arguement2> <arguement3> ... 
+
+//Below is a list of different instructions and thier description
+
+//Move a unit-layer object from old-position to new-position (leave null character behind)
+move <old-position-x> <old-position-y> <new-position-x> <new-position-y> 
+
+//Color an object on layer and postion with color 
+color <layer> <x-position> <y-position> <color>
+
+//Create an object of object-type and color and position on layer
+create <layer> <x-position> <y-position> <color> <object-type>
+
+//Destroy object at postion on layer (leave null character behind)
+destroy <layer> <x-position> <y-position>
+
+
+
+
+
+
