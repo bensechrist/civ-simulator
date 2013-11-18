@@ -1,17 +1,27 @@
 #include <cstdio>
+#include <string>
 #include <iostream>
 
-typedef enum colors { black = 30, red, green, yellow, blue, purple, aqua, white } consoleColors;
+typedef enum colors { black = 30, red, green, yellow, blue, purple, aqua, white, grayBG = 40, redBG, greenBG, yellowBG, blueBG, purpleBG, aquaBG, whiteBG } consoleColors;
 
-void colorText(char* input, consoleColors color) {
-	std::cout<<"\033[0;"<<color<<"m"<<input<<"\033[0m";
+void colorText(std::string input, int color, int bg) {
+	std::cout<<"\033[0;"<<color<<";"<<bg<<"m"<<input<<"\033[0m";
 }
 
 int main(int argc, char ** argv)
 {
+
+	for (int i=30; i<38; i++) {
+		for (int j=40; j<48; j++) {
+			colorText("Hello World", i, j);
+			std::cout<<std::endl;
+		}
+	}
+
 	int select;
 	consoleColors color;
-	while(1) {
+	consoleColors bgColor;
+	/*while(1) {
 		std::cin>>select;
 		switch(select) {
 		case 1:
@@ -51,7 +61,7 @@ int main(int argc, char ** argv)
 			break;
 		}
 		std::cout<<std::endl;
-	}
+	}*/
 
     return 0;
 }

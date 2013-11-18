@@ -4,7 +4,7 @@
 int main(int argc, char ** argv)
 {
     std::string default_console = "\033[0m";
-    for (int i = 30; i <= 37; i++)
+    for (int i = 30; i <= 57; i++)
     {
         std::cout<<"\033[0;"<<i<<"m"<<"test "<<i<<std::endl;
 
