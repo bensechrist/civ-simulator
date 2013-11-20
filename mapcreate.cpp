@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include "terrainagent.h"
+#include "terraincreator.h"
 
 using namespace std;
 
@@ -8,10 +8,20 @@ using namespace std;
 #define usageError 1    //Indicate the program was called incorrectly
 
 void printHelpMessage(int coutType);
-class terrainAgent;
 
 int main(int argc,char* argv[])
 {
+    //Constants to be read in from config file
+    const char fillChar = '~';
+
+
+
+
+
+
+    //
+
+
 
     int paramFlag = 0;  //Value to be incrementmented upon encountering a parameter flag
 
@@ -57,19 +67,36 @@ int main(int argc,char* argv[])
 
     //char map[(xSize+1)*(ySize+1)];
 
-    terrainAgent mapAgent(xSize, ySize);
-    mapAgent.fillMap();
+    terrainCreator map(xSize, ySize);
+    map.fillMap(fillChar);
+
+
+
+
+
+
     cout << mapAgent.printMap();
 
 
 }
 
-//  Function:
+//Function:
 //      printHelpMessage
 //
-//  Description:
+//Description:
 //      Prints a help message on program parameter errors or -h parameter used
 //
+//Preconditions:
+//      Understanding by user of what output stream they want to print to
+//
+//Arguments:
+//      int coutType - flag differntiating between std error and std out for the help message
+//
+//Postconditions:
+//      Help message is printed to the screen
+//
+//Returns:
+//      None
 //
 void printHelpMessage(int coutType)
 {

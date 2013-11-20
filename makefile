@@ -2,7 +2,7 @@ all:
 	
 
 mapcreate:
-	g++ mapcreate.cpp terrainagent.cpp -o mapcreate
+	g++ mapcreate.cpp terraincreator.cpp -o mapcreate
 
 
 clean:
