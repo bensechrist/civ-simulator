@@ -156,7 +156,11 @@ void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char
 void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
 {
 
+    //cout << endl << "life = " << life;
+
     if(life <= 0)return;
+
+
 
     m_map[location] = m_featureChar;
 
@@ -178,7 +182,7 @@ void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
     while( !isValidMapLocation(compass[randDirection]) );
 
 
-    terrainAgent(randDirection, (--life));
+    terrainAgent(compass[randDirection], (--life));
 
 }
 
@@ -204,7 +208,9 @@ bool terrainCreator::isValidMapLocation(int location)
 {
     if(location < 0) return false;
     if(location >= ((m_map_x + 1)*(m_map_y)) - 1) return false;
-    if((location % (m_map_x + 1)) == 0)return false;
+    if(m_map[location] == '\n')return false;
+
+    //cout << "char at location = " << m_map[location];
 
     return true;
 }

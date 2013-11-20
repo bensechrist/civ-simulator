@@ -13,10 +13,10 @@ int main(int argc,char* argv[])
 {
     //Constants to be read in from config file
     const char fillChar = '~';
-    const char landChar = '.';
-    const unsigned int agentNum = 5;
+    const char landChar = 'X';
+    const unsigned int agentNum = 6;
     //const double burnout = 0.5;
-    const unsigned int agentMaxLife = 100;
+    const unsigned int agentMaxLife = 1000;
 
 
     //
