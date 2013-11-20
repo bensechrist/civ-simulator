@@ -108,12 +108,14 @@ void terrainCreator::fillMap(char fillChar)
 //Returns:
 //      None
 //
-void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife)
+
+void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife, int pattern)
 {
     m_featureChar = featureChar;
     m_subChar = subChar;
     //m_burnoutCoef = burnout;
     m_agentMaxLife = agentMaxLife;
+    m_pattern = (algType)pattern;
 
     unsigned int rand_location;
 
@@ -160,7 +162,7 @@ void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
 
     if(life <= 0)return;
 
-
+    //cerr << endl << "location = " << location;
 
     m_map[location] = m_featureChar;
 
@@ -174,17 +176,28 @@ void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
     };
 
     int randDirection;
+    int counter = 0;
 
-    do
+    randDirection = rand() % 4;
+
+    while( 1 )
     {
+        if( isValidMapLocation(compass[randDirection]) )
+        {
+            if(isValidSubcharLocation(randDirection))
+            {
+                break;
+            }
+        }
+        counter++;
         randDirection = rand() % 4;
+        if(counter > 25) return;
     }
-    while( !isValidMapLocation(compass[randDirection]) );
-
 
     terrainAgent(compass[randDirection], (--life));
-
 }
+
+
 
 //Function:
 //     isValidMapLocation
@@ -216,6 +229,31 @@ bool terrainCreator::isValidMapLocation(int location)
 }
 
 //Function:
+//      isValidSubcharLocation
+//
+//Description:
+//      Checks to see iff parameter location is what is stored in subChar
+//
+//Preconditions:
+//      Constructor was called, map array was created and exists.
+//      Location must be a valid map array index.
+//
+//Arguments:
+//      unsigned int location - map array location to check validity
+//
+//Postconditions:
+//
+//
+//Returns:
+//
+//
+bool terrainCreator::isValidSubcharLocation(int location)
+{
+    if(m_map[location] == m_subChar) return true;
+    else return false;
+}
+
+//Function:
 //     printMap
 //
 //Description:
@@ -237,4 +275,24 @@ char* terrainCreator::printMap()
 {
     return m_map;
 }
+
+
+//Function:
+//
+//
+//Description:
+//
+//
+//Preconditions:
+//
+//
+//Arguments:
+//
+//
+//Postconditions:
+//
+//
+//Returns:
+//
+//
 

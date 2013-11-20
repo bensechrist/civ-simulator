@@ -12,12 +12,20 @@ void printHelpMessage(int coutType);
 int main(int argc,char* argv[])
 {
     //Constants to be read in from config file
-    const char fillChar = '~';
-    const char landChar = 'X';
-    const unsigned int agentNum = 6;
-    //const double burnout = 0.5;
-    const unsigned int agentMaxLife = 1000;
+    const char oceanChar = '~';
+    const char landChar = 'W';
+    const char mountainChar = '^';
 
+
+    const unsigned int landFrequency = 10000;
+    const unsigned int landAgentNum = 100;
+
+    const unsigned int mountainFrequency = 10000;
+    const unsigned int mountainAgentNum = 500;
+
+
+    const unsigned int snakePattern = 0;
+    const unsigned int densePattern = 1;
 
     //
 
@@ -68,8 +76,9 @@ int main(int argc,char* argv[])
     //char map[(xSize+1)*(ySize+1)];
 
     terrainCreator map(xSize, ySize);
-    map.fillMap(fillChar);
-    map.createFeature(agentNum, landChar, fillChar, agentMaxLife);
+    map.fillMap(oceanChar);
+    map.createFeature(landAgentNum, landChar, oceanChar, landFrequency, densePattern);
+    //map.createFeature(mountainAgentNum,  mountainChar, landChar, mountainFrequency, snakePattern);
 
 
 
