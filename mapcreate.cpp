@@ -15,8 +15,8 @@ int main(int argc,char* argv[])
     const char fillChar = '~';
     const char landChar = '.';
     const unsigned int agentNum = 5;
-
-
+    //const double burnout = 0.5;
+    const unsigned int agentMaxLife = 100;
 
 
     //
@@ -69,7 +69,7 @@ int main(int argc,char* argv[])
 
     terrainCreator map(xSize, ySize);
     map.fillMap(fillChar);
-
+    map.createFeature(agentNum, landChar, fillChar, agentMaxLife);
 
 
 

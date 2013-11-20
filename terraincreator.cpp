@@ -1,5 +1,8 @@
 #include "terraincreator.h"
 #include <cstdlib>
+#include <iostream>
+
+using namespace std;
 
 //Function:
 //     terrainCreator (constructor)
@@ -105,10 +108,12 @@ void terrainCreator::fillMap(char fillChar)
 //Returns:
 //      None
 //
-void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar)
+void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife)
 {
     m_featureChar = featureChar;
     m_subChar = subChar;
+    //m_burnoutCoef = burnout;
+    m_agentMaxLife = agentMaxLife;
 
     unsigned int rand_location;
 
@@ -120,7 +125,7 @@ void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char
         }
         while( ( (rand_location % m_map_x) == 0 ) || ( m_map[rand_location] != m_subChar ) );                //Retry if encountering an edge (newline location)
 
-        terrainAgent(rand_location);
+        terrainAgent(rand_location, (rand() % m_agentMaxLife));
     }
 
 }
@@ -148,9 +153,13 @@ void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char
 //      None
 //
 
-void terrainCreator::terrainAgent(unsigned int location)
+void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
 {
+
+    if(life <= 0)return;
+
     m_map[location] = m_featureChar;
+
 
     unsigned int compass[4] =
     {
@@ -160,7 +169,44 @@ void terrainCreator::terrainAgent(unsigned int location)
         (location + m_map_x + 1)
     };
 
+    int randDirection;
 
+    do
+    {
+        randDirection = rand() % 4;
+    }
+    while( !isValidMapLocation(compass[randDirection]) );
+
+
+    terrainAgent(randDirection, (--life));
+
+}
+
+//Function:
+//     isValidMapLocation
+//
+//Description:
+//      Checks to see if parameter location is on the map (not outside the array or on an endline or NULL)
+//
+//Preconditions:
+//      Constructor was called, map array was created and exists.
+//
+//Arguments:
+//      unsigned int location - map array location to check validity
+//
+//Postconditions:
+//      None
+//
+//Returns:
+//      Boolean indicating whether the parameter location is a valid map array location
+//
+bool terrainCreator::isValidMapLocation(int location)
+{
+    if(location < 0) return false;
+    if(location >= ((m_map_x + 1)*(m_map_y)) - 1) return false;
+    if((location % (m_map_x + 1)) == 0)return false;
+
+    return true;
 }
 
 //Function:

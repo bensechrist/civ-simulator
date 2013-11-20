@@ -9,8 +9,9 @@ public:
 
     void fillMap(char fillChar);
 
-    void createFeature(unsigned int agentNum, char featureChar, char subChar);
-    void terrainAgent(unsigned int location);
+    void createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife);
+    void terrainAgent(unsigned int location, unsigned int life);
+    bool isValidMapLocation(int location);
 
     char* printMap();
 
@@ -24,6 +25,8 @@ private:
 
     char m_featureChar;         //Hold current character being placed
     char m_subChar;             //Hold current character with which to replace with featureChar
+    //double m_burnoutCoef;       //Hold current burnout coeffecient for any Agents created
+    unsigned int m_agentMaxLife;
 
 };
 
