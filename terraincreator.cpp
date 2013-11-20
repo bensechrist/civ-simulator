@@ -1,4 +1,5 @@
 #include "terraincreator.h"
+#include <cstdlib>
 
 //Function:
 //     terrainCreator (constructor)
@@ -84,8 +85,81 @@ void terrainCreator::fillMap(char fillChar)
     m_map[mapSize] = '\0';
 }
 
-void createLandmass()
+//Function:
+//     createLandmass
+//
+//Description:
+//      Generates random starting locations for multiple terrain creator agents
+//
+//Preconditions:
+//      Constructor was called, map array was created and exists
+//      Filling the map array with mapFill is required
+//
+//Arguments:
+//      unsigned int agentNum - Number of randomly positioned agents, increases likelyhood of higher number of continents
+//      char featureChar - Character which represents the feature being applied
+//
+//Postconditions:
+//      Map is filled with
+//
+//Returns:
+//      None
+//
+void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar)
 {
+    m_featureChar = featureChar;
+    m_subChar = subChar;
+
+    unsigned int rand_location;
+
+    for(int i = 0; i < agentNum; i++)
+    {
+        do
+        {
+            rand_location = rand() % ((m_map_x+1)*(m_map_y));   //Generate random map location
+        }
+        while( ( (rand_location % m_map_x) == 0 ) || ( m_map[rand_location] != m_subChar ) );                //Retry if encountering an edge (newline location)
+
+        terrainAgent(rand_location);
+    }
+
+}
+
+//Function:
+//     terrainAgent
+//
+//Description:
+//      Recursive algorithm to make "somewhat" random and hopefully realistic landmasses
+//
+//Preconditions:
+//      Constructor was called, map array was created and exists.
+//      Filling the map array with mapFill is required.
+//      Calling createFeature before calling this function is required.
+//      Argument location must not be an edge (newline) or end (NULL) of the map array
+//      Argument location should be occupied by a character equivalent to m_subChar
+//
+//Arguments:
+//      unsigned int location - starting location on map array
+//
+//Postconditions:
+//      m_featureChar character will be added to the map over top of m_subChar in select locations
+//
+//Returns:
+//      None
+//
+
+void terrainCreator::terrainAgent(unsigned int location)
+{
+    m_map[location] = m_featureChar;
+
+    unsigned int compass[4] =
+    {
+        (location + 1),
+        (location - m_map_x - 1),
+        (location - 1),
+        (location + m_map_x + 1)
+    };
+
 
 }
 

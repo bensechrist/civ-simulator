@@ -9,18 +9,21 @@ public:
 
     void fillMap(char fillChar);
 
-    void createLandmass();
-
+    void createFeature(unsigned int agentNum, char featureChar, char subChar);
+    void terrainAgent(unsigned int location);
 
     char* printMap();
 
 private:
+
+
     char* m_map;                //Hold the map plus newlines on the edge
     unsigned int m_map_x;       //Hold the map's x dimension
     unsigned int m_map_y;       //Hold the map's y dimension
     char m_fillChar;            //Hold the fill character for the initial map
 
-    char m_landChar;
+    char m_featureChar;         //Hold current character being placed
+    char m_subChar;             //Hold current character with which to replace with featureChar
 
 };
 

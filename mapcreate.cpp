@@ -13,8 +13,8 @@ int main(int argc,char* argv[])
 {
     //Constants to be read in from config file
     const char fillChar = '~';
-
-
+    const char landChar = '.';
+    const unsigned int agentNum = 5;
 
 
 
@@ -74,8 +74,7 @@ int main(int argc,char* argv[])
 
 
 
-
-    cout << mapAgent.printMap();
+    cout << map.printMap();
 
 
 }
