@@ -1,15 +1,17 @@
+#include <stdlib.h>
 
-
+#include <time.h>
 
 class terrainCreator
 {
 public:
-    terrainCreator(unsigned int x,unsigned int y);
+    terrainCreator(unsigned int x, unsigned int y);
     ~terrainCreator();
 
     void fillMap(char fillChar);
 
-    void createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife, int pattern);
+    void createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife);
+    void smoothFeature(char featureChar, char subChar);
     void terrainAgent(unsigned int location, unsigned int life);
     bool isValidMapLocation(int location);
     bool isValidSubcharLocation(int location);
@@ -29,6 +31,8 @@ private:
     //double m_burnoutCoef;       //Hold current burnout coeffecient for any Agents created
     unsigned int m_agentMaxLife;
     enum algType{snake, dense} m_pattern;
+
+
 
 };
 

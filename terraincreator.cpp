@@ -1,6 +1,5 @@
 #include "terraincreator.h"
-#include <cstdlib>
-#include <iostream>
+
 
 using namespace std;
 
@@ -25,6 +24,9 @@ using namespace std;
 //
 terrainCreator::terrainCreator(unsigned int x,unsigned int y)
 {
+
+
+
     m_map_x = x;
     m_map_y = y;
     m_map = new char[((m_map_x+1)*m_map_y)+1];
@@ -109,27 +111,101 @@ void terrainCreator::fillMap(char fillChar)
 //      None
 //
 
-void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife, int pattern)
+void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char subChar, unsigned int agentMaxLife)
 {
     m_featureChar = featureChar;
     m_subChar = subChar;
     //m_burnoutCoef = burnout;
     m_agentMaxLife = agentMaxLife;
-    m_pattern = (algType)pattern;
+    //m_pattern = (algType)pattern;
+
+
+    srand(time(NULL));//Initialize random seed
 
     unsigned int rand_location;
 
     for(int i = 0; i < agentNum; i++)
     {
+
         do
         {
             rand_location = rand() % ((m_map_x+1)*(m_map_y));   //Generate random map location
         }
-        while( ( (rand_location % m_map_x) == 0 ) || ( m_map[rand_location] != m_subChar ) );                //Retry if encountering an edge (newline location)
+        while( /*( (rand_location % m_map_x) == 0 ) ||*/ ( m_map[rand_location] != m_subChar ) );                //Retry if encountering an edge (newline location)
 
         terrainAgent(rand_location, (rand() % m_agentMaxLife));
+
     }
 
+}
+
+//Function:
+//     smoothFeature
+//
+//Description:
+//
+//
+//Preconditions:
+//
+//
+//Arguments:
+//
+//
+//Postconditions:
+//
+//
+//Returns:
+//      None
+//
+void terrainCreator::smoothFeature(char featureChar, char subChar)
+{
+    m_subChar = subChar;
+
+    int weight = 0;
+
+    for(int i = 0;i < ((m_map_x+1)*m_map_y);i++)
+    {
+        if(!isValidSubcharLocation(m_map[i])) continue;
+
+        if( isValidMapLocation( i+1 ) )//look at east
+        {
+            if(m_map[i+1] == featureChar)
+            {
+                weight++;
+            }
+        }
+
+        if( isValidMapLocation( i-m_map_x-1 ) )//look at north
+        {
+            if(m_map[i-m_map_x-1] == featureChar)
+            {
+                weight++;
+            }
+        }
+
+        if( isValidMapLocation( i-1 ) )//look at west
+        {
+            if(m_map[i-1] == featureChar)
+            {
+                weight++;
+            }
+        }
+
+        if( isValidMapLocation( i+m_map_x+1 ) )//look at south
+        {
+            if(m_map[i+m_map_x+1] == featureChar)
+            {
+                weight++;
+            }
+        }
+
+        if(((rand() % 5) + 1) < weight)
+        {
+            m_map[i] == featureChar;
+        }
+
+
+    }
 }
 
 //Function:
