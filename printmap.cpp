@@ -126,7 +126,7 @@ int main(int argc, char ** argv) {
             }
         } else i--;
     }
-	
+
 	char city_roadLayer[500][500];
 	char unitLayer[500][500];
 	int colorCity_Road[500][500];
@@ -188,6 +188,8 @@ int main(int argc, char ** argv) {
 				break;
 			default:
 				cout<<num_of_turns++<<endl;
+
+				mapBase.clear();
 				
 				y = 0;
 				while(1) {
