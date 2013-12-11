@@ -13,6 +13,7 @@
 simulate::simulate(int mapsizeX, int mapsizeY)
 {
 	currentTurn = 0; // Turn 0 = setup
+	simfail = 0;
 	numPlayers = 2;
 	output.open("action_list.txt"); // Output of all simulation actions
 					// to be used in another part of the program
@@ -21,6 +22,7 @@ simulate::simulate(int mapsizeX, int mapsizeY)
 	if(!output.is_open())
 	{
 		numTurns = 0;
+		simfail = 1;
 		printError(1);
 	}
 	// Prints an error if an improper mapsize is given
@@ -28,6 +30,7 @@ simulate::simulate(int mapsizeX, int mapsizeY)
 	else if(mapsizeX <= 0 || mapsizeY <= 0)
 	{
 		numTurns = 0;
+		simfail=1;
 		printError(2);
 	}
 	else
@@ -89,6 +92,10 @@ void simulate::runSim()
 	// file.
 	for(int i = 0; i<numTurns; i++)
 	{
+		if(simfail)
+		{
+			break;
+		}
 		currentTurn++;
 		output<<i+1<<endl;
 
@@ -706,29 +713,37 @@ void simulate::setup()
 		}
 	}
 	
-	// Places x starting cities for each player.
-	// x represents the total_cities variable.
-	// Chooses the starting locations randomly
-	for(int j = 0; j<numPlayers; j++)
+	if(settle.size() <= 0 || (settle.size() < (numPlayers*total_cities)))
 	{
-		if(j == 0)
+		cerr<<"simulate: map could not store all cities, simulation failed!\n";
+		simfail = 1;
+	}
+	else
+	{
+		// Places x starting cities for each player.
+		// x represents the total_cities variable.
+		// Chooses the starting locations randomly
+		for(int j = 0; j<numPlayers; j++)
 		{
-			color = p1Color;
-		}
-		else
-		{
-			color = p2Color;
-		}
+			if(j == 0)
+			{
+				color = p1Color;
+			}
+			else
+			{
+				color = p2Color;
+			}
 
-		for(int k = 0; k<total_cities; k++)
-		{
-			random = rand() % settle.size();	
-			x = settle[random].x;
-			y = settle[random].y;
-			create(1,x,y,color);
-			settle[random].x = settle.back().x;
-			settle[random].y = settle.back().y;
-			settle.pop_back();
+			for(int k = 0; k<total_cities; k++)
+			{
+				random = rand() % settle.size();	
+				x = settle[random].x;
+				y = settle[random].y;
+				create(1,x,y,color);
+				settle[random].x = settle.back().x;
+				settle[random].y = settle.back().y;
+				settle.pop_back();
+			}
 		}
 	}
 }
