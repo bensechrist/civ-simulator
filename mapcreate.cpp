@@ -183,7 +183,8 @@ void printHelpMessage(int coutType)
 //
 void parseConfig(int* forestAgentNum, int* forestFrequency, char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum)
 {
-    ifstream configFile ("config");
+
+    ifstream configFile ("./config");
 
     if(configFile.fail())
     {
@@ -213,7 +214,7 @@ void parseConfig(int* forestAgentNum, int* forestFrequency, char* forestChar, ch
 
 
     for(int i = 0; i < numParams;i++)
-    {
+    {		
         if(configFile.eof()) break;
 
         getline(configFile, line);
@@ -265,8 +266,7 @@ void parseConfig(int* forestAgentNum, int* forestFrequency, char* forestChar, ch
                     cerr << "MapCreate: Error: Something went wrong while parsing.";
 
             }
-        }
-        else i--;
+        } else i--;
     }
 
 }

@@ -3,16 +3,27 @@
 
 
 //Display parameters
-plains_character = 'L'
-plains_color = 'yellow'		
+/*
+* Colors are defined as follows:
+* 	Black = 30, Red = 31, Green = 32, Yellow = 33, Blue = 34, Purple = 35, Aqua = 36, White = 37
+* Background colors are defined as follows:
+* 	Black = 40, Red = 41, Green = 42, Yellow = 43, Blue = 44, Purple = 45, Aqua = 46, White = 47
+*/
+plains_character = ' '
+plains_color = '33'	
+plains_BG_color = '42'	
 mountain_character = '^'
-mountain_color = 'gray'
+mountain_color = '35'
+mountain_BG_color = '42'
 forest_character = '*'
-forest_color = 'dark green'
-ocean_character = '.'
-ocean_color = 'light blue'
+forest_color = '32'
+forest_BG_color = '42'
+ocean_character = '~'
+ocean_color = '37'
+ocean_BG_color = '44'
 river_character = 'S'
-river_color = 'light blue'
+river_color = '36'
+river_BG_color = '47'
 
 //Map generation paramters
 landFrequency = '5000'
