@@ -181,7 +181,7 @@ void printHelpMessage(int coutType)
 //
 void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum)
 {
-    ifstream configFile ("/home/alex/ece2524/project/civ-simulator/config");
+    ifstream configFile ("./config");
 
     if(configFile.fail())
     {
@@ -209,7 +209,7 @@ void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountain
 
 
     for(int i = 0; i < numParams;i++)
-    {
+    {		
         if(configFile.eof()) break;
 
         getline(configFile, line);
@@ -254,8 +254,7 @@ void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountain
                     cerr << "MapCreate: Error: Something went wrong while parsing.";
 
             }
-        }
-        else i--;
+        } else i--;
     }
 
 }
