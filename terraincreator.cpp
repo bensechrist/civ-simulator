@@ -1,4 +1,4 @@
-+0#include "terraincreator.h"
+#include "terraincreator.h"
 
 
 using namespace std;
