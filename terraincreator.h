@@ -18,6 +18,8 @@ public:
     bool isValidSubcharLocation(int location);
     int findClosestSubChar(int location);
 
+    void sanityCheck();
+
     char* printMap();
 
 private:

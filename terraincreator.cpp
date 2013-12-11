@@ -1,4 +1,4 @@
-#include "terraincreator.h"
++0#include "terraincreator.h"
 
 
 using namespace std;
@@ -149,16 +149,18 @@ void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char
 //     smoothFeature
 //
 //Description:
-//
+//      By chance, may fill in locations with featureChar.
+//      Chance gets higher the more surrounding cells have featureChar's.
 //
 //Preconditions:
-//
+//      Map must exist.
 //
 //Arguments:
-//
+//      featureChar - character to smooth
+//      subChar - character featureChar can exist on
 //
 //Postconditions:
-//
+//      Any occurance of featureChar should appear smoother
 //
 //Returns:
 //      None
@@ -384,6 +386,37 @@ int terrainCreator::findClosestSubChar(int location)
     return -1; //Failure
 }
 
+
+//Function:
+//
+//
+//Description:
+//
+//
+//Preconditions:
+//
+//
+//Arguments:
+//
+//
+//Postconditions:
+//
+//
+//Returns:
+//
+//
+
+void terrainCreator::sanityCheck()
+{
+    for(int i = 0; i < m_map_y; i++)
+    {
+        for(int j = 0; j < (m_map_x + 1); j++)
+        {
+            if((m_map_x % j) == 0) m_map[j] = '\n';
+        }
+    }
+}
+
 //Function:
 //     printMap
 //
@@ -404,6 +437,7 @@ int terrainCreator::findClosestSubChar(int location)
 //
 char* terrainCreator::printMap()
 {
+    sanityCheck();
     return m_map;
 }
 
