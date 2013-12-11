@@ -5,4 +5,20 @@ url: https://github.com/bensechrist/civ-simulator
 
 description: Our project is a civilization simulator.  It creates a map and populates the map with AI players.  The AI players then expand their civilizations and send out armies to conquer others.  The simulator will run for a specified amount of time and then terminate.  Many parameters for map generation and the simulation will be set in a configuration file.  Furthurmore, each section of the simulator will be programed in c++ but will use a python or bash script to tie of of the parts together.  The program will leverage heavily on already existing linux code and commands.  Lastly, th program is designed in a highly modular fashion.  These facts fit well with the UNIX philosophy.
 
- 
+// How to use guide:
+// Starting the program:
+// To run program, use the shell script.
+// Uses the command $ ./simulator.sh.
+// You can modify the script to change some parameters.
+// Changing mapfile will change where the map itself is stored.
+// Changing x or y will determine how large of map is generated.
+// Configuration options:
+// For the simulation options, you can change how many turns there
+// are per simulation by changing turns. 
+// You can change how many armies each player can have by changing
+// maximum_armies. The number of cities each player can have is changed
+// by cities_per_player. The colors of player1 and player2 may also be
+// changed by modifying the player1_color and player2_color lines.
+// However, the color code must come from one of the colors listed
+// under display parameters (30-37). You must also keep the single 
+// quotes intact or the program will not properly scan the config file.
