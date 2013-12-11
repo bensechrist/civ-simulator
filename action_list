@@ -1,0 +1,39 @@
+// Sample action list
+// The simulation will output an action list that looks EXACTLY like this.
+// Obviously, no comments will be present in outputted version, this is just for clarification.
+// sample instruction: Instruction arg1 arg2 arg3 ...
+// All possible actions plus sample:
+// move command: will move a unit/army from old position to new position
+// format: M <old-position-x> <old-position-y> <new-position-x> <new-position-y>
+// sample: M 0 1 0 2 (moves a unit from position <0,1> to <0,2>)
+// color command: Colors an object at the layer and position with the listed color
+// format: L <layer> <x-position> <y-position> <color>
+// sample: L 2 0 0 black (colors a unit at position <0,0> with the color black)
+// create command: Creates an object of object-type (will only be units) and color at the specified layer
+// format: C <layer> <x-position> <y-position> <color> <object-type>
+// sample: C 1 0 0 yellow road
+// destroy command: Destroys the object at the specified layer at the position
+// format: D <layer> <x-position> <y-position>
+// sample: D 1 5 10 (destroys a city at position <5,10>)
+// All possible arguments:
+// <layer> - will be 1-2 where 1 is the CITY/ROAD layer (only cities/roads will be present) and 2
+// is the UNIT layer which will contain armies. Terrain will never be modified in simulation.
+// <x-position>/<y-position> - will be an integer greater than 0
+// <color> - will be a string with the name of the color and will match the names present in
+// the colorfunc.cpp file.
+// <object-type> will either be city or road or army and that will be the object specified
+// Sample list:
+0 // Turn number - O represents initial setup
+C 1 0 0 black city
+C 1 10 20 blue city
+1 // Turn number
+C 2 0 0 black army
+C 2 10 20 blue army
+2
+M 1 0 9 20 // Note: moves will not be more than 1 X or Y away but this is just for demonstration
+3
+D 2 10 20 // Destroys the blue army at positon <10,20>
+4
+L 1 10 20 black // The black army has taken the city
+// end sample list - output from simulation will have the exact same name as this file
+
