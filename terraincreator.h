@@ -36,7 +36,5 @@ private:
     unsigned int m_agentMaxLife;
     enum algType{snake, dense} m_pattern;
 
-
-
 };
 
