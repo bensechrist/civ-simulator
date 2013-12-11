@@ -31,12 +31,11 @@ void colorObject(char input, int color) {
 	cout<<"\033[0;"<<color<<"m"<<input<<"\033[0m";
 }
 
-int main(int argc, char ** argv) {
-	ifstream mapBase("./map");
+int main(int argc, char **) {
 	ifstream config("./config");
 	ifstream actionList("./action_list.txt");
 	
-	if (config.fail() || mapBase.fail() || actionList.fail()) {
+	if (config.fail() || actionList.fail()) {
 		cerr << "printmap: failed to open map, actionlist, or config file"<<endl;
 	}
 	
@@ -189,7 +188,11 @@ int main(int argc, char ** argv) {
 			default:
 				cout<<num_of_turns++<<endl;
 
-				mapBase.clear();
+				ifstream mapBase("./map");
+				if (!mapBase.is_open()) {
+					cerr<<"printmap: map not opening"<<endl;
+					break;
+				}
 				
 				y = 0;
 				while(1) {
@@ -211,6 +214,7 @@ int main(int argc, char ** argv) {
 					}
 					cout<<endl;
 				}
+				mapBase.close();
 				break;
 		}
 	}
