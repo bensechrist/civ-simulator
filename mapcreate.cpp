@@ -11,7 +11,7 @@ using namespace std;
 #define usageError 1    //Indicate the program was called incorrectly
 
 void printHelpMessage(int coutType);
-void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum);
+void parseConfig(int* forestAgentNum, int* forestFrequency, char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum);
 
 
 int main(int argc,char* argv[])
@@ -73,29 +73,31 @@ int main(int argc,char* argv[])
     }
 
 
-        char oceanChar;
-        char landChar;
-        char mountainChar;
-        char forestChar;
-        int landFrequency;
-        int landAgentNum;
-        int mountainFrequency;
-        int mountainAgentNum;
+    char oceanChar;
+    char landChar;
+    char mountainChar;
+    char forestChar;
+    int landFrequency;
+    int landAgentNum;
+    int mountainFrequency;
+    int mountainAgentNum;
+    int forestFrequency;
+    int forestAgentNum;
 
-        if(readFromStdin)
-        {
-            cin >> oceanChar;
-            cin >> landChar;
-            cin >> mountainChar;
-            cin >> landFrequency;
-            cin >> landAgentNum;
-            cin >> mountainFrequency;
-            cin >> mountainAgentNum;
-        }
-        else
-        {
-            parseConfig(&forestChar,&oceanChar,&landChar,&mountainChar,&landFrequency,&landAgentNum,&mountainFrequency,&mountainAgentNum);
-        }
+    if(readFromStdin)
+    {
+        cin >> oceanChar;
+        cin >> landChar;
+        cin >> mountainChar;
+        cin >> landFrequency;
+        cin >> landAgentNum;
+        cin >> mountainFrequency;
+        cin >> mountainAgentNum;
+    }
+    else
+    {
+        parseConfig(&forestAgentNum, &forestFrequency, &forestChar,&oceanChar,&landChar,&mountainChar,&landFrequency,&landAgentNum,&mountainFrequency,&mountainAgentNum);
+    }
 
 
 
@@ -115,7 +117,7 @@ int main(int argc,char* argv[])
     map.smoothFeature(landChar, oceanChar);
     map.createFeature(mountainAgentNum,  mountainChar, landChar, mountainFrequency);
     map.smoothFeature(mountainChar, landChar);
-    map.createFeature(mountainAgentNum,  forestChar, landChar, mountainFrequency);
+    map.createFeature(forestAgentNum,  forestChar, landChar, forestFrequency);
     map.smoothFeature(forestChar, landChar);
 
 
@@ -179,9 +181,9 @@ void printHelpMessage(int coutType)
 //Returns:
 //
 //
-void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum)
+void parseConfig(int* forestAgentNum, int* forestFrequency, char* forestChar, char* oceanChar,char* landChar,char* mountainChar,int* landFrequency,int* landAgentNum,int* mountainFrequency,int* mountainAgentNum)
 {
-    ifstream configFile ("/home/alex/ece2524/project/civ-simulator/config");
+    ifstream configFile ("config");
 
     if(configFile.fail())
     {
@@ -189,7 +191,7 @@ void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountain
     }
 
 
-    const int numParams = 9;
+    const int numParams = 11;
     string configParams[numParams] =
     {
         "plains_character",
@@ -200,7 +202,9 @@ void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountain
         "landFrequency",
         "landAgentNum",
         "mountainFrequency",
-        "mountainAgentNum"
+        "mountainAgentNum",
+        "forestFrequency",
+        "forestAgentNum"
     };
 
     string line;
@@ -250,6 +254,13 @@ void parseConfig(char* forestChar, char* oceanChar,char* landChar,char* mountain
                 case 8:
                     tempStream >> (*mountainAgentNum);
                     break;
+                case 9:
+                    tempStream >> (*forestFrequency);
+                    break;
+                case 10:
+                    tempStream >> (*forestAgentNum);
+                    break;
+
                 default:
                     cerr << "MapCreate: Error: Something went wrong while parsing.";
 

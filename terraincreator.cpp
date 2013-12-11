@@ -126,17 +126,23 @@ void terrainCreator::createFeature(unsigned int agentNum, char featureChar, char
 
     for(int i = 0; i < agentNum; i++)
     {
+        rand_location = rand() % ((m_map_x+1)*(m_map_y));   //Generate random map location
 
-        do
+        if( isValidMapLocation(rand_location) )
         {
-            rand_location = rand() % ((m_map_x+1)*(m_map_y));   //Generate random map location
+            if( isValidSubcharLocation(rand_location) )
+            {
+                terrainAgent(rand_location, (rand() % m_agentMaxLife));
+                continue;
+            }
         }
-        while( /*( (rand_location % m_map_x) == 0 ) ||*/ ( m_map[rand_location] != m_subChar ) );                //Retry if encountering an edge (newline location)
 
-        terrainAgent(rand_location, (rand() % m_agentMaxLife));
+        int closest = findClosestSubChar(rand_location);
+
+        if(closest == -1) continue;
+        else terrainAgent(closest, (rand() % m_agentMaxLife));
 
     }
-
 }
 
 //Function:
@@ -251,26 +257,29 @@ void terrainCreator::terrainAgent(unsigned int location, unsigned int life)
         (location + m_map_x + 1)
     };
 
-    int randDirection;
-    int counter = 0;
+    deque<unsigned int> directions;
 
-    randDirection = rand() % 4;
-
-    while( 1 )
+    for(int i = 0; i < 4; i++)
     {
-        if( isValidMapLocation(compass[randDirection]) )
+        if( isValidMapLocation(compass[i]) )
         {
-            if(isValidSubcharLocation(randDirection))
+            if( isValidSubcharLocation(compass[i]) )
             {
-                break;
+                directions.push_front(compass[i]);
             }
         }
-        counter++;
-        randDirection = rand() % 4;
-        if(counter > 25) return;
     }
 
-    terrainAgent(compass[randDirection], (--life));
+    if(directions.empty())
+    {
+        return;
+    }
+
+    //srand(time(NULL));//Initialize random seed
+
+    int num = (rand() % directions.size());
+
+    terrainAgent(directions[num], (--life));
 }
 
 
@@ -327,6 +336,52 @@ bool terrainCreator::isValidSubcharLocation(int location)
 {
     if(m_map[location] == m_subChar) return true;
     else return false;
+}
+
+//Function:
+//      findClosestSubChar
+//
+//Description:
+//      Finds (more or less) the closest map location with a subChar in it.
+//
+//Preconditions:
+//      Map must be created
+//
+//Arguments:
+//      location - origin point which the function will find the closest point
+//
+//Postconditions:
+//      None
+//
+//Returns:
+//      The closest point on the map with the subChar in it
+//
+
+int terrainCreator::findClosestSubChar(int location)
+{
+
+    for(int i = 0; i < (m_map_x + 1)*(m_map_y);i++ )
+    {
+
+        if( isValidMapLocation( location + 1 ) )
+        {
+            if(isValidSubcharLocation( location + 1 ))
+            {
+                return ( location + i );
+            }
+        }
+
+
+        if( isValidMapLocation( location - i ) )
+        {
+            if(isValidSubcharLocation( location - i ))
+            {
+                return ( location - i );
+            }
+        }
+    }
+
+    return -1; //Failure
 }
 
 //Function:

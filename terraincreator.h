@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <deque>
 
 #include <time.h>
 
@@ -15,6 +16,7 @@ public:
     void terrainAgent(unsigned int location, unsigned int life);
     bool isValidMapLocation(int location);
     bool isValidSubcharLocation(int location);
+    int findClosestSubChar(int location);
 
     char* printMap();
 

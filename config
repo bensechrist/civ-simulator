@@ -15,10 +15,12 @@ river_character = 'S'
 river_color = 'light blue'
 
 //Map generation paramters
-landFrequency = '500'
-landAgentNum = '40'
-mountainFrequency = '10000'
-mountainAgentNum = '500'
+landFrequency = '5000'
+landAgentNum = '75'
+mountainFrequency = '1000'
+mountainAgentNum = '50'
+forestFrequency = '500'
+forestAgentNum = '50'
 snakePattern = '0'
 densePattern = '1'
 
