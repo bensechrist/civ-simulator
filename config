@@ -1,6 +1,12 @@
 //Config format file
 //The config file contains items which each separate game program reads in and parses to set certain parameters
 
+//Simulation parameters
+turns = '50'
+maximum_armies = '2'
+cities_per_player = '1'
+player1_color = '31'
+player2_color = '30'
 
 //Display parameters
 /*
