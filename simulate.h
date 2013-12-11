@@ -67,7 +67,7 @@ char plains, mountain, forest, ocean, river;//Representation of terrain types
 int p1Color;//Color code which represents player1
 int p2Color;//Color code which represents player2
 ofstream output;//Output file that action list is written to
-
+bool simfail;
 //Will find all adjacent spaces on the map at the given position
 void findAdjacent(int x, int y,vector<coord>&adj);
 //Represents all city units
