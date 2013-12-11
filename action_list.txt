@@ -1,39 +1,161 @@
-// Sample action list
-// The simulation will output an action list that looks EXACTLY like this.
-// Obviously, no comments will be present in outputted version, this is just for clarification.
-// sample instruction: Instruction arg1 arg2 arg3 ...
-// All possible actions plus sample:
-// move command: will move a unit/army from old position to new position
-// format: M <old-position-x> <old-position-y> <new-position-x> <new-position-y>
-// sample: M 0 1 0 2 (moves a unit from position <0,1> to <0,2>)
-// color command: Colors an object at the layer and position with the listed color
-// format: L <layer> <x-position> <y-position> <color>
-// sample: L 2 0 0 black (colors a unit at position <0,0> with the color black)
-// create command: Creates an object of object-type (will only be units) and color at the specified layer
-// format: C <layer> <x-position> <y-position> <color> <object-type>
-// sample: C 1 0 0 yellow road
-// destroy command: Destroys the object at the specified layer at the position
-// format: D <layer> <x-position> <y-position>
-// sample: D 1 5 10 (destroys a city at position <5,10>)
-// All possible arguments:
-// <layer> - will be 1-2 where 1 is the CITY/ROAD layer (only cities/roads will be present) and 2
-// is the UNIT layer which will contain armies. Terrain will never be modified in simulation.
-// <x-position>/<y-position> - will be an integer greater than 0
-// <color> - will be a string with the name of the color and will match the names present in
-// the colorfunc.cpp file.
-// <object-type> will either be city or road or army and that will be the object specified
-// Sample list:
-0 // Turn number - O represents initial setup
-C 1 0 0 black city
-C 1 10 20 blue city
-1 // Turn number
-C 2 0 0 black army
-C 2 10 20 blue army
+0
+C 1 1 2 31 city
+C 1 0 2 30 city
+1
 2
-M 1 0 9 20 // Note: moves will not be more than 1 X or Y away but this is just for demonstration
 3
-D 2 10 20 // Destroys the blue army at positon <10,20>
+C 1 1 1 31 road
+C 1 0 1 30 road
 4
-L 1 10 20 black // The black army has taken the city
-// end sample list
-
+5
+C 2 1 2 31 army
+L 1 0 2 31
+M 1 2 1 1
+6
+C 1 1 3 31 road
+C 1 0 3 31 road
+L 1 0 1 31
+7
+M 1 1 1 0
+8
+M 1 0 2 0
+9
+C 1 1 0 31 road
+M 2 0 3 0
+10
+C 2 1 2 31 army
+M 3 0 4 0
+M 1 2 1 1
+11
+M 4 0 3 0
+M 1 1 1 0
+12
+C 1 2 1 31 road
+M 3 0 4 0
+M 1 0 2 0
+13
+M 4 0 3 0
+M 2 0 1 0
+14
+M 3 0 4 0
+M 1 0 2 0
+15
+C 1 0 0 31 road
+M 4 0 3 0
+M 2 0 1 0
+16
+M 3 0 4 0
+M 1 0 2 0
+17
+M 4 0 3 0
+M 2 0 1 0
+18
+C 1 2 3 31 road
+M 3 0 4 0
+M 1 0 2 0
+19
+M 4 0 3 0
+M 2 0 1 0
+20
+M 3 0 4 0
+M 1 0 2 0
+21
+C 1 1 4 31 road
+M 4 0 3 0
+M 2 0 1 0
+22
+M 3 0 4 0
+M 1 0 2 0
+23
+M 4 0 3 0
+M 2 0 1 0
+24
+C 1 0 4 31 road
+M 3 0 4 0
+M 1 0 2 0
+25
+M 4 0 3 0
+M 2 0 1 0
+26
+M 3 0 4 0
+M 1 0 2 0
+27
+C 1 3 1 31 road
+M 4 0 3 0
+M 2 0 1 0
+28
+M 3 0 4 0
+M 1 0 2 0
+29
+M 4 0 3 0
+M 2 0 1 0
+30
+C 1 2 0 31 road
+M 3 0 4 0
+M 1 0 2 0
+31
+M 4 0 3 0
+M 2 0 1 0
+32
+M 3 0 4 0
+M 1 0 2 0
+33
+C 1 3 3 31 road
+M 4 0 3 0
+M 2 0 1 0
+34
+M 3 0 4 0
+M 1 0 2 0
+35
+M 4 0 3 0
+M 2 0 1 0
+36
+C 1 2 4 31 road
+M 3 0 4 0
+M 1 0 2 0
+37
+M 4 0 3 0
+M 2 0 1 0
+38
+M 3 0 4 0
+M 1 0 2 0
+39
+C 1 3 0 31 road
+M 4 0 3 0
+M 2 0 1 0
+40
+M 3 0 4 0
+M 1 0 2 0
+41
+M 4 0 3 0
+M 2 0 1 0
+42
+C 1 4 1 31 road
+M 3 0 4 0
+M 1 0 2 0
+43
+M 4 0 3 0
+M 2 0 1 0
+44
+M 3 0 4 0
+M 1 0 2 0
+45
+C 1 4 3 31 road
+M 4 0 3 0
+M 2 0 1 0
+46
+M 3 0 4 0
+M 1 0 2 0
+47
+M 4 0 3 0
+M 2 0 1 0
+48
+C 1 3 4 31 road
+M 3 0 4 0
+M 1 0 2 0
+49
+M 4 0 3 0
+M 2 0 1 0
+50
+M 3 0 4 0
+M 1 0 2 0
