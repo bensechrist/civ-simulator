@@ -205,12 +205,10 @@ int main(int argc, char **) {
 				while(1) {
 					getline(mapBase, line);
 					x = 0;
-					y++;
 					if(mapBase.eof()) break;
 					stringstream linestream(line);
 					char temp;
 					while (linestream >> temp) {
-						x++;
 						if (unitLayer[x][y] && (unitLayer[x][y] != 'Q')) {
 							colorObject(unitLayer[x][y], colorUnits[x][y]);
 						} else if (city_roadLayer[x][y] && (city_roadLayer[x][y] != 'Q')) {
@@ -218,8 +216,10 @@ int main(int argc, char **) {
 						} else {
 							colorText(temp);
 						}
+						x++;
 					}
 					cout<<endl;
+					y++;
 				}
 				mapBase.close();
 				usleep(1000000);
