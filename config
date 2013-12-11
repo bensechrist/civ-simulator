@@ -32,4 +32,11 @@ river_color = '36'
 river_BG_color = '47'
 
 //Map generation paramters
-landFreque
+landFrequency = '5000'
+landAgentNum = '100'
+mountainFrequency = '150'
+mountainAgentNum = '50'
+forestFrequency = '50'
+forestAgentNum = '50'
+mapSizeX = '100'
+mapSizeY = '100'
