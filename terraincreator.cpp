@@ -408,12 +408,9 @@ int terrainCreator::findClosestSubChar(int location)
 
 void terrainCreator::sanityCheck()
 {
-    for(int i = 0; i < m_map_y; i++)
+    for(int i = m_map_x; i < (m_map_y)*(m_map_x + 1); i+=(m_map_x + 1))
     {
-        for(int j = 0; j < (m_map_x + 1); j++)
-        {
-            if((m_map_x % j) == 0) m_map[j] = '\n';
-        }
+        m_map[i] = '\n';
     }
 }
 
@@ -437,7 +434,7 @@ void terrainCreator::sanityCheck()
 //
 char* terrainCreator::printMap()
 {
-    //sanityCheck();
+    sanityCheck();
     return m_map;
 }
 

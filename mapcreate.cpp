@@ -71,6 +71,11 @@ int main(int argc,char* argv[])
             else break;
         }
     }
+    else if(argc < 3)
+    {
+        printHelpMessage(usageError);
+        return 1;
+    }
 
 
     char oceanChar;
