@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <unistd.h>
 using namespace std;
 
 // Global Variables
@@ -29,6 +30,12 @@ void colorText(char input) {
 
 void colorObject(char input, int color) {
 	cout<<"\033[0;"<<color<<"m"<<input<<"\033[0m";
+}
+
+void ClearScreen() {
+    int n;
+    for (n = 0; n < 10; n++)
+      cout<<"\n\n\n\n\n\n\n\n\n\n";
 }
 
 int main(int argc, char **) {
@@ -186,14 +193,14 @@ int main(int argc, char **) {
 				}
 				break;
 			default:
-				cout<<num_of_turns++<<endl;
-
 				ifstream mapBase("./map");
 				if (!mapBase.is_open()) {
 					cerr<<"printmap: map not opening"<<endl;
 					break;
 				}
 				
+				ClearScreen();
+
 				y = 0;
 				while(1) {
 					getline(mapBase, line);
@@ -215,6 +222,7 @@ int main(int argc, char **) {
 					cout<<endl;
 				}
 				mapBase.close();
+				usleep(1000000);
 				break;
 		}
 	}

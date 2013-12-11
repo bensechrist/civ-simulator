@@ -16,7 +16,7 @@ player2_color = '30'
 * 	Black = 40, Red = 41, Green = 42, Yellow = 43, Blue = 44, Purple = 45, Aqua = 46, White = 47
 */
 plains_character = 'L'
-plains_color = '33'	
+plains_color = '32'	
 plains_BG_color = '42'	
 mountain_character = '^'
 mountain_color = '35'
