@@ -437,7 +437,7 @@ void terrainCreator::sanityCheck()
 //
 char* terrainCreator::printMap()
 {
-    sanityCheck();
+    //sanityCheck();
     return m_map;
 }
 
