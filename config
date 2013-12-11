@@ -9,7 +9,7 @@
 * Background colors are defined as follows:
 * 	Black = 40, Red = 41, Green = 42, Yellow = 43, Blue = 44, Purple = 45, Aqua = 46, White = 47
 */
-plains_character = ' '
+plains_character = 'L'
 plains_color = '33'	
 plains_BG_color = '42'	
 mountain_character = '^'
@@ -32,6 +32,5 @@ mountainFrequency = '1000'
 mountainAgentNum = '50'
 forestFrequency = '500'
 forestAgentNum = '50'
-snakePattern = '0'
-densePattern = '1'
-
+mapSizeX = '100'
+mapSizeY = '100'
