@@ -27,12 +27,17 @@ void colorText(char input) {
 	}
 }
 
+void colorObject(char input, int color) {
+	cout<<"\033[0;"<<color<<"m"<<input<<"\033[0m";
+}
+
 int main(int argc, char ** argv) {
-	ifstream mapBase("./test");
+	ifstream mapBase("./map");
 	ifstream config("./config");
+	ifstream actionList("./action_list.txt");
 	
-	if (config.fail() || mapBase.fail()) {
-		cerr << "printmap: failed to open map or config file"<<endl;
+	if (config.fail() || mapBase.fail() || actionList.fail()) {
+		cerr << "printmap: failed to open map, actionlist, or config file"<<endl;
 	}
 	
 	string configParams[15] = {
@@ -122,16 +127,90 @@ int main(int argc, char ** argv) {
         } else i--;
     }
 	
+	char city_roadLayer[500][500];
+	char unitLayer[500][500];
+	int colorCity_Road[500][500];
+	int colorUnits[500][500];
+	string line;
+	int num_of_turns = 1;
 	while(1) {
-		string line;
-		getline(mapBase, line);
-		if(mapBase.eof()) break;
+		getline(actionList, line);
+		if (actionList.eof()) break;
 		stringstream linestream(line);
-		char temp;
-		while (linestream >> temp) {
-			colorText(temp);
+		char action;
+		int turn, layer, x, y, newX, newY, color;
+		string object;
+		linestream >> action;
+		switch (action) {
+			case 'M':
+				linestream >> x >> y >> newX >> newY;
+				unitLayer[newX][newY] = unitLayer[x][y];
+				unitLayer[x][y] = 'Q';
+				colorUnits[newX][newY] = colorUnits[x][y];
+				colorUnits[x][y] = 0;
+				break;
+			case 'L':
+				linestream >> layer >> x >> y >> color;
+				if (layer == 1) {
+					colorCity_Road[x][y] = color;
+				} else if (layer == 2) {
+					colorUnits[x][y] = color;
+				} else {
+					cerr<<"printmap: error in coloring"<<endl;
+				}
+				break;
+			case 'C':
+				linestream >> layer >> x >> y >> color >> object;
+				if (layer == 1) {
+					if (object == "city")
+						city_roadLayer[x][y] = 'C';
+					else if (object == "road")
+						city_roadLayer[x][y] = 'R';
+					colorCity_Road[x][y] = color;
+				} else if (layer == 2) {
+					unitLayer[x][y] = 'U';
+					colorUnits[x][y] = color;
+				} else {
+					cerr<<"printmap: error in creating"<<endl;
+				}
+				break;
+			case 'D':
+				linestream >> layer >> x >> y;
+				if (layer == 1) {
+					city_roadLayer[x][y] = 'Q';
+					colorCity_Road[x][y] = 0;
+				} else if (layer == 2) {
+					unitLayer[x][y] = 'Q';
+					colorUnits[x][y] = 0;
+				} else {
+					cerr<<"printmap: error in destroying"<<endl;
+				}
+				break;
+			default:
+				cout<<num_of_turns++<<endl;
+				
+				y = 0;
+				while(1) {
+					getline(mapBase, line);
+					x = 0;
+					y++;
+					if(mapBase.eof()) break;
+					stringstream linestream(line);
+					char temp;
+					while (linestream >> temp) {
+						x++;
+						if (unitLayer[x][y] && (unitLayer[x][y] != 'Q')) {
+							colorObject(unitLayer[x][y], colorUnits[x][y]);
+						} else if (city_roadLayer[x][y] && (city_roadLayer[x][y] != 'Q')) {
+							colorObject(city_roadLayer[x][y], colorCity_Road[x][y]);
+						} else {
+							colorText(temp);
+						}
+					}
+					cout<<endl;
+				}
+				break;
 		}
-		cout<<endl;
 	}
 	
 	return 0;
