@@ -2,9 +2,9 @@
 //The config file contains items which each separate game program reads in and parses to set certain parameters
 
 //Simulation parameters
-turns = '50'
-maximum_armies = '2'
-cities_per_player = '1'
+turns = '100'
+maximum_armies = '200'
+cities_per_player = '10'
 player1_color = '31'
 player2_color = '30'
 
@@ -16,13 +16,13 @@ player2_color = '30'
 * 	Black = 40, Red = 41, Green = 42, Yellow = 43, Blue = 44, Purple = 45, Aqua = 46, White = 47
 */
 plains_character = 'L'
-plains_color = '32'	
-plains_BG_color = '42'	
+plains_color = '33'	
+plains_BG_color = '43'	
 mountain_character = '^'
 mountain_color = '35'
 mountain_BG_color = '42'
 forest_character = '*'
-forest_color = '32'
+forest_color = '30'
 forest_BG_color = '42'
 ocean_character = '~'
 ocean_color = '37'
@@ -34,9 +34,9 @@ river_BG_color = '47'
 //Map generation paramters
 landFrequency = '5000'
 landAgentNum = '100'
-mountainFrequency = '150'
+mountainFrequency = '10'
 mountainAgentNum = '50'
 forestFrequency = '50'
 forestAgentNum = '50'
-mapSizeX = '100'
-mapSizeY = '100'
+mapSizeX = '50'
+mapSizeY = '50'

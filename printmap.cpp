@@ -28,8 +28,18 @@ void colorText(char input) {
 	}
 }
 
-void colorObject(char input, int color) {
-	cout<<"\033[0;"<<color<<"m"<<input<<"\033[0m";
+void colorObject(char input, int color, char BGChar) {
+	if (BGChar == landChar) {
+		cout<<"\033[0;"<<color<<";"<<landBGColor<<"m"<<input<<"\033[0m";
+	} else if (BGChar == mountainChar) {
+		cout<<"\033[0;"<<color<<";"<<mountainBGColor<<"m"<<input<<"\033[0m";
+	} else if (BGChar == forestChar) {
+		cout<<"\033[0;"<<color<<";"<<forestBGColor<<"m"<<input<<"\033[0m";
+	} else if (BGChar == oceanChar) {
+		cout<<"\033[0;"<<color<<";"<<oceanBGColor<<"m"<<input<<"\033[0m";
+	} else if (BGChar == riverChar) {
+		cout<<"\033[0;"<<color<<";"<<riverBGColor<<"m"<<input<<"\033[0m";
+	}
 }
 
 void ClearScreen() {
@@ -210,9 +220,9 @@ int main(int argc, char **) {
 					char temp;
 					while (linestream >> temp) {
 						if (unitLayer[x][y] && (unitLayer[x][y] != 'Q')) {
-							colorObject(unitLayer[x][y], colorUnits[x][y]);
+							colorObject(unitLayer[x][y], colorUnits[x][y], temp);
 						} else if (city_roadLayer[x][y] && (city_roadLayer[x][y] != 'Q')) {
-							colorObject(city_roadLayer[x][y], colorCity_Road[x][y]);
+							colorObject(city_roadLayer[x][y], colorCity_Road[x][y], temp);
 						} else {
 							colorText(temp);
 						}
