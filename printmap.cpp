@@ -299,5 +299,6 @@ int main(int argc, char **) {
 			}
 		}
 
+		endwin();
 		return 0;
 }
