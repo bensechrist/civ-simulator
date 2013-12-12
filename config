@@ -10,8 +10,8 @@
 
 //Simulation parameters
 turns = '50'
-maximum_armies = '2'
-cities_per_player = '5'
+maximum_armies = '20'
+cities_per_player = '10'
 player1_color = '1'
 player2_color = '5'
 

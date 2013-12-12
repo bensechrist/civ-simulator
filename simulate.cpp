@@ -803,7 +803,7 @@ void simulate::destroy(int layer, int x, int y)
 	switch(layer)
 	{
 		case 1:
-		if(map[x][y].city = 1)
+		if(map[x][y].city == 1)
 		{
 			spot = findCity(x,y);
 			city[spot].x = city.back().x;

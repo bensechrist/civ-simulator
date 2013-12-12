@@ -15,76 +15,39 @@ int landBGColor, mountainBGColor, forestBGColor, oceanBGColor, riverBGColor;
 
 void colorText(char input) {	
 	if (input == landChar) {
-		attron(COLOR_PAIR(20));
+		attron(COLOR_PAIR(50));
 		addch(input);
-		attroff(COLOR_PAIR(20));
+		attroff(COLOR_PAIR(50));
 	} else if (input == mountainChar) {
-		attron(COLOR_PAIR(21));
+		attron(COLOR_PAIR(51));
 		addch(input);
-		attroff(COLOR_PAIR(21));
+		attroff(COLOR_PAIR(51));
 	} else if (input == forestChar) {
-		attron(COLOR_PAIR(22));
+		attron(COLOR_PAIR(52));
 		addch(input);
-		attroff(COLOR_PAIR(22));
+		attroff(COLOR_PAIR(52));
 	} else if (input == oceanChar) {
-		attron(COLOR_PAIR(23));
+		attron(COLOR_PAIR(53));
 		addch(input);
-		attroff(COLOR_PAIR(23));
+		attroff(COLOR_PAIR(53));
 	} else if (input == riverChar) {
-		attron(COLOR_PAIR(24));
+		attron(COLOR_PAIR(54));
 		addch(input);
-		attroff(COLOR_PAIR(24));
+		attroff(COLOR_PAIR(54));
 	} else {
 		cout<<"?";
 	}
 }
 
 void colorObject(char input, int color, char BGChar) {
-	if (BGChar == landChar) {
-		init_pair(0, COLOR_BLACK, landBGColor);
-		init_pair(1, COLOR_RED, landBGColor);
-		init_pair(2, COLOR_GREEN, landBGColor);
-		init_pair(3, COLOR_YELLOW, landBGColor);
-		init_pair(4, COLOR_BLUE, landBGColor);
-		init_pair(5, COLOR_MAGENTA, landBGColor);
-		init_pair(6, COLOR_CYAN, landBGColor);
-		init_pair(7, COLOR_WHITE, landBGColor);
-	} else if (BGChar == mountainChar) {
-		init_pair(0, COLOR_BLACK, mountainBGColor);
-		init_pair(1, COLOR_RED, mountainBGColor);
-		init_pair(2, COLOR_GREEN, mountainBGColor);
-		init_pair(3, COLOR_YELLOW, mountainBGColor);
-		init_pair(4, COLOR_BLUE, mountainBGColor);
-		init_pair(5, COLOR_MAGENTA, mountainBGColor);
-		init_pair(6, COLOR_CYAN, mountainBGColor);
-		init_pair(7, COLOR_WHITE, mountainBGColor);
+	if (BGChar == mountainChar) {
+		color += 10;
 	} else if (BGChar == forestChar) {
-		init_pair(0, COLOR_BLACK, forestBGColor);
-		init_pair(1, COLOR_RED, forestBGColor);
-		init_pair(2, COLOR_GREEN, forestBGColor);
-		init_pair(3, COLOR_YELLOW, forestBGColor);
-		init_pair(4, COLOR_BLUE, forestBGColor);
-		init_pair(5, COLOR_MAGENTA, forestBGColor);
-		init_pair(6, COLOR_CYAN, forestBGColor);
-		init_pair(7, COLOR_WHITE, forestBGColor);
+		color += 20;
 	} else if (BGChar == oceanChar) {
-		init_pair(0, COLOR_BLACK, oceanBGColor);
-		init_pair(1, COLOR_RED, oceanBGColor);
-		init_pair(2, COLOR_GREEN, oceanBGColor);
-		init_pair(3, COLOR_YELLOW, oceanBGColor);
-		init_pair(4, COLOR_BLUE, oceanBGColor);
-		init_pair(5, COLOR_MAGENTA, oceanBGColor);
-		init_pair(6, COLOR_CYAN, oceanBGColor);
-		init_pair(7, COLOR_WHITE, oceanBGColor);
+		color += 30;
 	} else if (BGChar == riverChar) {
-		init_pair(0, COLOR_BLACK, riverBGColor);
-		init_pair(1, COLOR_RED, riverBGColor);
-		init_pair(2, COLOR_GREEN, riverBGColor);
-		init_pair(3, COLOR_YELLOW, riverBGColor);
-		init_pair(4, COLOR_BLUE, riverBGColor);
-		init_pair(5, COLOR_MAGENTA, riverBGColor);
-		init_pair(6, COLOR_CYAN, riverBGColor);
-		init_pair(7, COLOR_WHITE, riverBGColor);
+		color += 40;
 	}
 	attron(COLOR_PAIR(color));
 	addch(input | A_BOLD);
@@ -189,12 +152,57 @@ int main(int argc, char **) {
             }
         } else i--;
     }
-    
-  	init_pair(20, landColor, landBGColor);
-  	init_pair(21, mountainColor, mountainBGColor);
-  	init_pair(22, forestColor, forestBGColor);
-  	init_pair(23, oceanColor, oceanBGColor);
-  	init_pair(24, riverColor, riverBGColor);
+  	
+  	init_pair(0, COLOR_BLACK, landBGColor);
+		init_pair(1, COLOR_RED, landBGColor);
+		init_pair(2, COLOR_GREEN, landBGColor);
+		init_pair(3, COLOR_YELLOW, landBGColor);
+		init_pair(4, COLOR_BLUE, landBGColor);
+		init_pair(5, COLOR_MAGENTA, landBGColor);
+		init_pair(6, COLOR_CYAN, landBGColor);
+		init_pair(7, COLOR_WHITE, landBGColor);
+		
+		init_pair(10, COLOR_BLACK, mountainBGColor);
+		init_pair(11, COLOR_RED, mountainBGColor);
+		init_pair(12, COLOR_GREEN, mountainBGColor);
+		init_pair(13, COLOR_YELLOW, mountainBGColor);
+		init_pair(14, COLOR_BLUE, mountainBGColor);
+		init_pair(15, COLOR_MAGENTA, mountainBGColor);
+		init_pair(16, COLOR_CYAN, mountainBGColor);
+		init_pair(17, COLOR_WHITE, mountainBGColor);
+		
+		init_pair(20, COLOR_BLACK, forestBGColor);
+		init_pair(21, COLOR_RED, forestBGColor);
+		init_pair(22, COLOR_GREEN, forestBGColor);
+		init_pair(23, COLOR_YELLOW, forestBGColor);
+		init_pair(24, COLOR_BLUE, forestBGColor);
+		init_pair(25, COLOR_MAGENTA, forestBGColor);
+		init_pair(26, COLOR_CYAN, forestBGColor);
+		init_pair(27, COLOR_WHITE, forestBGColor);
+		
+		init_pair(30, COLOR_BLACK, oceanBGColor);
+		init_pair(31, COLOR_RED, oceanBGColor);
+		init_pair(32, COLOR_GREEN, oceanBGColor);
+		init_pair(33, COLOR_YELLOW, oceanBGColor);
+		init_pair(34, COLOR_BLUE, oceanBGColor);
+		init_pair(35, COLOR_MAGENTA, oceanBGColor);
+		init_pair(36, COLOR_CYAN, oceanBGColor);
+		init_pair(37, COLOR_WHITE, oceanBGColor);
+		
+		init_pair(40, COLOR_BLACK, riverBGColor);
+		init_pair(41, COLOR_RED, riverBGColor);
+		init_pair(42, COLOR_GREEN, riverBGColor);
+		init_pair(43, COLOR_YELLOW, riverBGColor);
+		init_pair(44, COLOR_BLUE, riverBGColor);
+		init_pair(45, COLOR_MAGENTA, riverBGColor);
+		init_pair(46, COLOR_CYAN, riverBGColor);
+		init_pair(47, COLOR_WHITE, riverBGColor);
+		
+		init_pair(50, landColor, landBGColor);
+  	init_pair(51, mountainColor, mountainBGColor);
+  	init_pair(52, forestColor, forestBGColor);
+  	init_pair(53, oceanColor, oceanBGColor);
+  	init_pair(54, riverColor, riverBGColor);
 
 		char city_roadLayer[500][500];
 		char unitLayer[500][500];
