@@ -12,8 +12,8 @@
 turns = '50'
 maximum_armies = '20'
 cities_per_player = '10'
-player1_color = '1'
-player2_color = '5'
+player1_color = '4'
+player2_color = '1'
 
 //Display parameters
 /*

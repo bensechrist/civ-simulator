@@ -209,7 +209,7 @@ void terrainCreator::smoothFeature(char featureChar, char subChar)
 
         if(((rand() % 5) + 1) < weight)
         {
-            m_map[i] == featureChar;
+            m_map[i] = featureChar;
         }
 
 

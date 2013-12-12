@@ -9,6 +9,7 @@
 using namespace std;
 
 // Global Variables
+int player1Color, player2Color;
 char landChar, mountainChar, forestChar, oceanChar, riverChar;
 int landColor, mountainColor, forestColor, oceanColor, riverColor;
 int landBGColor, mountainBGColor, forestBGColor, oceanBGColor, riverBGColor;
@@ -61,14 +62,14 @@ int main(int argc, char **) {
 	initscr();
 	
 	start_color();			/* Start color 			*/
-	
-	init_pair(1, COLOR_RED, COLOR_BLACK);
 
 	if (config.fail() || actionList.fail()) {
 		cerr << "printmap: failed to open map, actionlist, or config file"<<endl;
 	}
 	
-	string configParams[15] = {
+	string configParams[17] = {
+		"player1_color",
+		"player2_color",
     "plains_character",
 		"plains_color",
 		"plains_BG_color",
@@ -86,7 +87,7 @@ int main(int argc, char **) {
 		"river_BG_color"
   };
 	
-	for (int i = 0; i < 15;i++) {
+	for (int i = 0; i < 17;i++) {
     if(config.eof()) break;
 
 		string line;
@@ -102,49 +103,55 @@ int main(int argc, char **) {
 				lineEnd = line.find_last_of(39);
 				istringstream tempStream(line.substr(lineLocation+1, lineEnd-lineLocation-1));
 				switch(i) {
-            case 0:
+						case 0:
+							tempStream >> player1Color;
+							break;
+						case 1:
+							tempStream >> player2Color;
+							break;
+            case 2:
             	tempStream >> landChar;
               break;
-						case 1:
+						case 3:
 							tempStream >> landColor;
               break;
-						case 2:
+						case 4:
 							tempStream >> landBGColor;
 							break;
-            case 3:
+            case 5:
               tempStream >> mountainChar;
               break;
-						case 4:
+						case 6:
 							tempStream >> mountainColor;
               break;
-						case 5:
+						case 7:
 							tempStream >> mountainBGColor;
 							break;
-						case 6:
+						case 8:
 							tempStream >> forestChar;
 							break;
-						case 7:
+						case 9:
 							tempStream >> forestColor;
 							break;
-						case 8:
+						case 10:
 							tempStream >> forestBGColor;
 							break;
-						case 9:
+						case 11:
 							tempStream >> oceanChar;
 							break;
-						case 10:
+						case 12:
 							tempStream >> oceanColor;
 							break;
-						case 11:
+						case 13:
 							tempStream >> oceanBGColor;
 							break;
-						case 12:
+						case 14:
 							tempStream >> riverChar;
 							break;
-						case 13:
+						case 15:
 							tempStream >> riverColor;
 							break;
-						case 14:
+						case 16:
 							tempStream >> riverBGColor;
 							break;
             default:
@@ -203,11 +210,26 @@ int main(int argc, char **) {
   	init_pair(52, forestColor, forestBGColor);
   	init_pair(53, oceanColor, oceanBGColor);
   	init_pair(54, riverColor, riverBGColor);
+  	
+  	init_pair(100, COLOR_BLACK, COLOR_BLACK);
+  	init_pair(101, COLOR_RED, COLOR_BLACK);
+  	init_pair(102, COLOR_GREEN, COLOR_BLACK);
+  	init_pair(103, COLOR_YELLOW, COLOR_BLACK);
+  	init_pair(104, COLOR_BLUE, COLOR_BLACK);
+  	init_pair(105, COLOR_MAGENTA, COLOR_BLACK);
+  	init_pair(106, COLOR_CYAN, COLOR_BLACK);
+  	init_pair(107, COLOR_WHITE, COLOR_BLACK);
 
 		char city_roadLayer[500][500];
 		char unitLayer[500][500];
 		int colorCity_Road[500][500];
 		int colorUnits[500][500];
+		int numCitiesP1 = 0;
+		int numCitiesP2 = 0;
+		int numRoadsP1 = 0;
+		int numRoadsP2 = 0;
+		int numUnitsP1 = 0;
+		int numUnitsP2 = 0;
 		string line;
 		int num_of_turns = 1;
 		while(1) {
@@ -229,8 +251,32 @@ int main(int argc, char **) {
 				case 'L':
 					linestream >> layer >> x >> y >> color;
 					if (layer == 1) {
+						if (city_roadLayer[x][y] == 'R') {
+							if (colorCity_Road[x][y] == player1Color) {
+								numRoadsP1--;
+								numRoadsP2++;
+							} else if (colorCity_Road[x][y] == player2Color) {
+								numRoadsP2--;
+								numRoadsP1++;
+							}
+						} else if (city_roadLayer[x][y] == 'C') {
+							if (colorCity_Road[x][y] == player1Color) {
+								numCitiesP1--;
+								numCitiesP2++;
+							} else if (colorCity_Road[x][y] == player2Color) {
+								numCitiesP2--;
+								numCitiesP1++;
+							}
+						}
 						colorCity_Road[x][y] = color;
 					} else if (layer == 2) {
+						if (colorUnits[x][y] == player1Color) {
+							numUnitsP1--;
+							numUnitsP2++;
+						} else if (colorUnits[x][y] == player2Color) {
+							numUnitsP2--;
+							numUnitsP1++;
+						}
 						colorUnits[x][y] = color;
 					} else {
 						cerr<<"printmap: error in coloring"<<endl;
@@ -239,14 +285,27 @@ int main(int argc, char **) {
 				case 'C':
 					linestream >> layer >> x >> y >> color >> object;
 					if (layer == 1) {
-						if (object == "city")
+						if (object == "city") {
 							city_roadLayer[x][y] = 'C';
-						else if (object == "road")
+							if (color == player1Color)
+								numCitiesP1++;
+							else if (color == player2Color)
+								numCitiesP2++;
+						} else if (object == "road") {
 							city_roadLayer[x][y] = 'R';
+							if (color == player1Color)
+								numRoadsP1++;
+							else if (color == player2Color)
+								numRoadsP2++;
+						}
 						colorCity_Road[x][y] = color;
 					} else if (layer == 2) {
 						unitLayer[x][y] = 'U';
 						colorUnits[x][y] = color;
+						if (color == player1Color)
+							numUnitsP1++;
+						else if (color == player2Color)
+							numUnitsP2++;
 					} else {
 						cerr<<"printmap: error in creating"<<endl;
 					}
@@ -254,9 +313,18 @@ int main(int argc, char **) {
 				case 'D':
 					linestream >> layer >> x >> y;
 					if (layer == 1) {
+						if (city_roadLayer[x][y] == 'R') {
+							if (colorCity_Road[x][y] == player1Color) numRoadsP1--;
+							else if (colorCity_Road[x][y] == player2Color) numRoadsP2--;
+						} else if (city_roadLayer[x][y] == 'C') {
+							if (colorCity_Road[x][y] == player1Color) numCitiesP1--;
+							else if (colorCity_Road[x][y] == player2Color) numCitiesP2--;
+						}
 						city_roadLayer[x][y] = 'Q';
 						colorCity_Road[x][y] = 0;
 					} else if (layer == 2) {
+						if (colorUnits[x][y] == player1Color) numUnitsP1--;
+						else if (colorUnits[x][y] == player2Color) numUnitsP2--;
 						unitLayer[x][y] = 'Q';
 						colorUnits[x][y] = 0;
 					} else {
@@ -270,6 +338,32 @@ int main(int argc, char **) {
 						break;
 					}
 
+					move(0,0);
+					attron(COLOR_PAIR(player1Color+100));
+					addstr("Player 1 Cities: ");
+					addch((int)(numCitiesP1/10) + '0');
+					addch((numCitiesP1%10) + '0');
+					addstr(" Roads: ");
+					addch((int)(numRoadsP1/10) + '0');
+					addch((numRoadsP1%10) + '0');
+					addstr(" Units: ");
+					addch((int)(numUnitsP1/10) + '0');
+					addch((numUnitsP1%10) + '0');
+					attroff(COLOR_PAIR(player1Color+100));
+					
+					attron(COLOR_PAIR(player2Color+100));
+					addstr("  Player 2 Cities: ");
+					addch((int)(numCitiesP2/10) + '0');
+					addch((numCitiesP2%10) + '0');
+					addstr(" Roads: ");
+					addch((int)(numRoadsP2/10) + '0');
+					addch((numRoadsP2%10) + '0');
+					addstr(" Units: ");
+					addch((int)(numUnitsP2/10) + '0');
+					addch((numUnitsP2%10) + '0');
+					addch('\n');
+					attroff(COLOR_PAIR(player2Color+100));
+					
 					y = 0;
 					while(1) {
 						getline(mapBase, line);
@@ -278,7 +372,7 @@ int main(int argc, char **) {
 						stringstream linestream(line);
 						char temp;
 						while (linestream >> temp) {
-							move(x,y);
+							move(y+1,x);
 							if (unitLayer[x][y] && (unitLayer[x][y] != 'Q')) {
 								colorObject(unitLayer[x][y], colorUnits[x][y], temp);
 								refresh();
