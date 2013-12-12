@@ -7,7 +7,7 @@ mapcreate:
 	g++ mapcreate.cpp terraincreator.cpp -o mapcreate
 
 printmap:
-	g++ printmap.cpp -o printmap
+	g++ printmap.cpp -o printmap -lncurses
 
 
 clean:

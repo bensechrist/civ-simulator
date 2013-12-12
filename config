@@ -1,35 +1,40 @@
 //Config format file
 //The config file contains items which each separate game program reads in and parses to set certain parameters
 
+/*
+* 	Color options for players:
+*			Black: 0, Red: 1, Green: 2, Yellow: 3, Blue: 4, Magenta: 5, Cyan: 6, White: 7
+*		Don't use a color that is also being used as a background color below as that player
+*			will occasionally disappear
+*/
+
 //Simulation parameters
-turns = '100'
-maximum_armies = '200'
-cities_per_player = '10'
-player1_color = '31'
-player2_color = '30'
+turns = '50'
+maximum_armies = '2'
+cities_per_player = '5'
+player1_color = '1'
+player2_color = '5'
 
 //Display parameters
 /*
 * Colors are defined as follows:
-* 	Black = 30, Red = 31, Green = 32, Yellow = 33, Blue = 34, Purple = 35, Aqua = 36, White = 37
-* Background colors are defined as follows:
-* 	Black = 40, Red = 41, Green = 42, Yellow = 43, Blue = 44, Purple = 45, Aqua = 46, White = 47
+* 		Black: 0, Red: 1, Green: 2, Yellow: 3, Blue: 4, Magenta: 5, Cyan: 6, White: 7
 */
 plains_character = 'L'
-plains_color = '33'	
-plains_BG_color = '43'	
+plains_color = '3'	
+plains_BG_color = '3'	
 mountain_character = '^'
-mountain_color = '35'
-mountain_BG_color = '42'
+mountain_color = '5'
+mountain_BG_color = '2'
 forest_character = '*'
-forest_color = '30'
-forest_BG_color = '42'
+forest_color = '0'
+forest_BG_color = '2'
 ocean_character = '~'
-ocean_color = '37'
-ocean_BG_color = '44'
+ocean_color = '7'
+ocean_BG_color = '4'
 river_character = 'S'
-river_color = '36'
-river_BG_color = '47'
+river_color = '6'
+river_BG_color = '7'
 
 //Map generation paramters
 landFrequency = '5000'
