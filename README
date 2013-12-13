@@ -15,6 +15,7 @@ description: Our project is a civilization simulator.  It creates a map and popu
 // You can modify the script to change some parameters.
 // Changing mapfile will change where the map itself is stored.
 // Changing x or y will determine how large of map is generated.
+// X is the number of columns, Y is the number of rows
 // Configuration options:
 // For the simulation options, you can change how many turns there
 // are per simulation by changing turns. 
