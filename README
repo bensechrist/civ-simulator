@@ -8,7 +8,8 @@ description: Our project is a civilization simulator.  It creates a map and popu
 // How to use guide:
 // Dependencies:
 // You will need to install ncurses library to compile this game.
-// Linux: $ sudo apt-get install libncurses5-dev
+// Ubuntu: $ sudo apt-get install libncurses5-dev
+// Fedora: $ sudo yum install libncurses5-dev
 // Compiling:
 // To compile run $ make clean
 // and then $ make
