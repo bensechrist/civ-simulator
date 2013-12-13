@@ -211,13 +211,13 @@ int main(int argc, char **) {
   	init_pair(53, oceanColor, oceanBGColor);
   	init_pair(54, riverColor, riverBGColor);
   	
-  	init_pair(100, COLOR_BLACK, COLOR_BLACK);
-  	init_pair(101, COLOR_RED, COLOR_BLACK);
-  	init_pair(102, COLOR_GREEN, COLOR_BLACK);
-  	init_pair(103, COLOR_YELLOW, COLOR_BLACK);
-  	init_pair(104, COLOR_BLUE, COLOR_BLACK);
-  	init_pair(105, COLOR_MAGENTA, COLOR_BLACK);
-  	init_pair(106, COLOR_CYAN, COLOR_BLACK);
+  	init_pair(100, COLOR_BLACK, COLOR_WHITE);
+  	init_pair(101, COLOR_RED, COLOR_WHITE);
+  	init_pair(102, COLOR_GREEN, COLOR_WHITE);
+  	init_pair(103, COLOR_YELLOW, COLOR_WHITE);
+  	init_pair(104, COLOR_BLUE, COLOR_WHITE);
+  	init_pair(105, COLOR_MAGENTA, COLOR_WHITE);
+  	init_pair(106, COLOR_CYAN, COLOR_WHITE);
   	init_pair(107, COLOR_WHITE, COLOR_BLACK);
 
 		char city_roadLayer[500][500];
@@ -394,5 +394,10 @@ int main(int argc, char **) {
 		}
 
 		endwin();
+		
+		cout<<"Player 1 [Cities: "<<numCitiesP1<<"][Roads: "<<numRoadsP1<<"][Units: "<<
+			numUnitsP1<<"]"<<endl<<"Player 2 [Cities: "<<numCitiesP2<<"][Roads: "<<
+			numRoadsP2<<"][Units: "<<numUnitsP2<<"]"<<endl;
+		
 		return 0;
 }
