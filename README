@@ -3,9 +3,13 @@ Civilization Simulator
 contributors: ahc24, tjd08a, bds1990
 url: https://github.com/bensechrist/civ-simulator
 
-description: Our project is a civilization simulator.  It creates a map and populates the map with AI players.  The AI players then expand their civilizations and send out armies to conquer others.  The simulator will run for a specified amount of time and then terminate.  Many parameters for map generation and the simulation will be set in a configuration file.  Furthurmore, each section of the simulator will be programed in c++ but will use a python or bash script to tie of of the parts together.  The program will leverage heavily on already existing linux code and commands.  Lastly, th program is designed in a highly modular fashion.  These facts fit well with the UNIX philosophy.
+description: Our project is a civilization simulator.  It creates a map and populates the map with AI players.  The AI players then expand their civilizations and send out armies to conquer others.  The simulator will run for a specified amount of time and then terminate.  Many parameters for map generation and the simulation will be set in a configuration file.  Furthurmore, each section of the simulator will be programed in c++ but will use a python or bash script to tie of of the parts together.  The program will leverage heavily on already existing linux code and commands.  Lastly, the program is designed in a highly modular fashion.  These facts fit well with the UNIX philosophy.
 
 // How to use guide:
+// Dependencies:
+// You will need to install ncurses library to compile this game.
+// Ubuntu: $ sudo apt-get install libncurses5-dev
+// Fedora: $ sudo yum install ncurses-devel.x86_64 
 // Compiling:
 // To compile run $ make clean
 // and then $ make
