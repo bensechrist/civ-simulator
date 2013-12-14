@@ -68,7 +68,7 @@ int main(int argc, char **) {
 		cerr << "printmap: failed to open map, actionlist, or config file"<<endl;
 	}
 	
-	string configParams[17] = {
+	string configParams[18] = {
 		"player1_color",
 		"player2_color",
         "plains_character",
@@ -89,7 +89,7 @@ int main(int argc, char **) {
         "sound_enable"
     };
 	
-	for (int i = 0; i < 17;i++) {
+	for (int i = 0; i < 18;i++) {
         if(config.eof()) break;
         
 		string line;
