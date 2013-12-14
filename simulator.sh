@@ -1,6 +1,6 @@
 #!/bin/bash         
-x=50
-y=10
+x=100
+y=50
 mapfile=map
 ./mapcreate $x $y > $mapfile
 ./simulation $mapfile $y $x

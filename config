@@ -10,8 +10,8 @@
 
 //Simulation parameters
 turns = '50'
-maximum_armies = '20'
-cities_per_player = '10'
+maximum_armies = '200'
+cities_per_player = '100'
 player1_color = '7'
 player2_color = '1'
 
@@ -39,7 +39,9 @@ river_BG_color = '7'
 //Map generation paramters
 landFrequency = '5000'
 landAgentNum = '100'
-mountainFrequency = '10'
+mountainFrequency = '150'
 mountainAgentNum = '50'
 forestFrequency = '50'
 forestAgentNum = '50'
+
+sound_enable = 'n'
