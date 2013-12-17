@@ -28,5 +28,20 @@ description: Our project is a civilization simulator.  It creates a map and popu
 // by cities_per_player. The colors of player1 and player2 may also be
 // changed by modifying the player1_color and player2_color lines.
 // However, the color code must come from one of the colors listed
-// under display parameters (30-37). You must also keep the single 
+// under display parameters (0-7). You must also keep the single 
 // quotes intact or the program will not properly scan the config file.
+// The Simulator:
+// If you follow all the instructions, you are probably wondering what
+// is taking place. There are two players in the simulator each one
+// assigned a color. The config file determines how many cities each
+// player has, and essentially, little 'C' characters appear around
+// the map (not on blue/ocean tiles) which represent the cities. It
+// is then that roads represented by 'R' and armies represented by 
+// 'U' are created. Roads are connected adjacently (up/down/left/right,
+// not diagonal) to the cities and to other roads. Armies move around
+// the map one space at a time and then take over (change the color to
+// their player's color) cities, and other roads. Armies of opposing
+// players with fight when they are adjacent to one and another, and 
+// will potentially destroy the other unit. Armies that are on roads
+// and cities will "cover-up" the space. The simulation is over
+// after a set number of turns that can be changed in the config file.
