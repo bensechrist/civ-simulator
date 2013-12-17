@@ -41,7 +41,7 @@ description: Our project is a civilization simulator.  It creates a map and popu
 // not diagonal) to the cities and to other roads. Armies move around
 // the map one space at a time and then take over (change the color to
 // their player's color) cities, and other roads. Armies of opposing
-// players with fight when they are adjacent to one and another, and 
+// players will fight when they are adjacent to one and another, and 
 // will potentially destroy the other unit. Armies that are on roads
 // and cities will "cover-up" the space. The simulation is over
 // after a set number of turns that can be changed in the config file.
